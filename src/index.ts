@@ -140,15 +140,14 @@ const H: Record<string, (id: string, sv?: string) => Promise<R>> = {
   zzz: autoSv('Zenless Zone Zero', 946399, 16000, 'ZENLESS_ZONE_ZERO', zzz_sv),
 }
 
-const M405 = new Response('{"success":false,"message":"Method not allowed"}', {
-  status: 405,
-  headers: { 'Content-Type': 'application/json', Allow: 'GET,HEAD,POST', ...CORS },
-})
-
 export default {
   async fetch(req: Request, _env: unknown, ctx: ExecutionContext): Promise<Response> {
     const m = req.method
-    if (m !== 'GET' && m !== 'HEAD' && m !== 'POST') return M405.clone()
+    if (m !== 'GET' && m !== 'HEAD' && m !== 'POST')
+      return new Response('{"success":false,"message":"Method not allowed"}', {
+        status: 405,
+        headers: { 'Content-Type': 'application/json', Allow: 'GET,HEAD,POST', ...CORS },
+      })
 
     const t = Date.now()
     const url = new URL(req.url)
