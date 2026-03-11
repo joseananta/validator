@@ -1,6 +1,6 @@
 # Game ID Validator API
 
-Cloudflare Worker untuk validasi ID game. Mendukung 16 game.
+Cloudflare Worker untuk validasi ID game. Mendukung 19 game.
 
 Dibuat ulang dari [ihsangan/valid](https://github.com/ihsangan/valid) dengan kode yang lebih efisien dan ringan (single-file, zero dependencies).
 
@@ -37,6 +37,9 @@ GET /{game}/{id}/{server}
 | Point Blank | `/pb/{id}` | `/pb/username` |
 | Sausage Man | `/sm/{id}` | `/sm/username` |
 | Super Sus | `/sus/{id}` | `/sus/123456` |
+| PUBG Mobile | `/pubg/{id}` | `/pubg/123456` |
+| EA Sports FC Mobile | `/fc/{id}` | `/fc/123456` |
+| League of Legends: Wild Rift | `/wr/{id}` | `/wr/123456` |
 
 ## Response
 

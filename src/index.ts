@@ -76,6 +76,11 @@ const H: Record<string, (id: string, sv?: string) => Promise<R>> = {
     const r = d.confirmationFields?.roles?.[0]
     return r ? { success: true, game: 'Call Of Duty Mobile', id: +id, name: r.role, server: r.server } : NF
   },
+  fc: async id => {
+    const d: any = await fetch(`https://gopay.co.id/games/v1/order/prepare/FC_MOBILE?userId=${encodeURIComponent(id)}`).then(r => r.json())
+    return d.data
+      ? { success: true, game: 'EA Sports FC Mobile', id, name: d.data } : NF
+  },
   ff: async id => {
     const d: any = await fetch(`https://gopay.co.id/games/v1/order/prepare/FREEFIRE?userId=${encodeURIComponent(id)}`).then(r => r.json())
     return { success: true, game: 'Garena Free Fire', id: +id, name: d.data }
@@ -121,6 +126,11 @@ const H: Record<string, (id: string, sv?: string) => Promise<R>> = {
     return d.confirmationFields?.username
       ? { success: true, game: 'Punishing: Gray Raven', id: +id, server: sv[0], name: d.confirmationFields.username } : NF
   },
+  pubg: async id => {
+    const d: any = await fetch(`https://gopay.co.id/games/v1/order/prepare/PUBGM?userId=${encodeURIComponent(id)}&zoneId=`).then(r => r.json())
+    return d.data
+      ? { success: true, game: 'PUBG Mobile', id: +id, name: d.data } : NF
+  },
   sm: async id => {
     const d = await c(b(id, 256513, 16000, 'SAUSAGE_MAN', 'global-release'))
     return d.confirmationFields?.username
@@ -136,6 +146,11 @@ const H: Record<string, (id: string, sv?: string) => Promise<R>> = {
     if (d.success === true) return { success: true, game: 'VALORANT', id, server: 'Indonesia', name: d.confirmationFields.username }
     if (d.errorCode === -200) return { success: true, game: 'VALORANT', id, name: id }
     return NF
+  },
+  wr: async id => {
+    const d: any = await fetch(`https://gopay.co.id/games/v1/order/prepare/WILD_RIFT?userId=${encodeURIComponent(id)}&zoneId=`).then(r => r.json())
+    return d.data
+      ? { success: true, game: 'League of Legends: Wild Rift', id: +id, name: d.data } : NF
   },
   zzz: autoSv('Zenless Zone Zero', 946399, 16000, 'ZENLESS_ZONE_ZERO', zzz_sv),
 }
